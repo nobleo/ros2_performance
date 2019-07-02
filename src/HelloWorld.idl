@@ -1,0 +1,5 @@
+// HelloWorld.idl
+struct HelloWorld
+{
+    string msg;
+};
