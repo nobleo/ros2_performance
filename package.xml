@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>ros_performance</name>
+  <name>ros2_performance</name>
   <version>1.0.0</version>
-  <description>Test ROS performance</description>
+  <description>Test ROS2 performance</description>
   <maintainer email="abc@def.ghi">abc</maintainer>
   <license>as-is</license>
   <author></author>
