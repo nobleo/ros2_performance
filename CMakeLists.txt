@@ -11,7 +11,7 @@ ament_target_dependencies(ros rclcpp std_msgs)
 install(TARGETS ros DESTINATION lib/${PROJECT_NAME})
 
 add_executable(rosonenode src/rosonenode.cc)
-ament_target_dependencies(rosonenode rclcpp)
+ament_target_dependencies(rosonenode rclcpp std_msgs)
 install(TARGETS rosonenode DESTINATION lib/${PROJECT_NAME})
 
 add_executable(nopub src/nopub.cc)
