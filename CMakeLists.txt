@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(ros_performance VERSION 1.0.0)
+project(ros2_performance VERSION 1.0.0)
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
