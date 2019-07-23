@@ -1,0 +1,56 @@
+version: '2.2'
+services:
+  ros:
+    image: ros2_performance:dashing
+    networks:
+      - network1
+    privileged: true
+    command: ./ros2_performance/install/ros2_performance/lib/ros2_performance/ros
+    mem_limit: 300m
+    mem_reservation: 100m
+  one_node:
+    image: ros2_performance:dashing
+    networks:
+      - network2
+    privileged: true
+    command: ./ros2_performance/install/ros2_performance/lib/ros2_performance/rosonenode
+    mem_limit: 300m
+    mem_reservation: 100m
+    depends_on:
+      - ros
+  nopub:
+    image: ros2_performance:dashing
+    networks:
+      - network3
+    privileged: true
+    command: ./ros2_performance/install/ros2_performance/lib/ros2_performance/nopub
+    mem_limit: 300m
+    mem_reservation: 100m
+    depends_on:
+      - one_node
+  rtps:
+    image: ros2_performance:dashing
+    networks:
+      - network4
+    privileged: true
+    command: ./ros2_performance/install/ros2_performance/lib/ros2_performance/rtps
+    mem_limit: 300m
+    mem_reservation: 100m
+    depends_on:
+      - nopub
+  noros:
+    image: ros2_performance:dashing
+    networks:
+      - network5
+    privileged: true
+    command: ./ros2_performance/install/ros2_performance/lib/ros2_performance/noros
+    mem_limit: 300m
+    mem_reservation: 100m
+    depends_on:
+      - nopub
+networks:
+  network1:
+  network2:
+  network3:
+  network4:
+  network5:
