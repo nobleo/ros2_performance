@@ -125,7 +125,7 @@ TODO: The FlameGraphs of the other binaries can be found in the images folder.
 
 ## Conclusions
 * The SingleThreadedExecutor is using a lot of CPU power. 
-* Adding more ROS2 nodes increases both the work performed by the eProsima and SingleThreadedExecutor part of the application. For the SingleThreadedExecutor this makes sense, more nodes means more work for the executor. The increase in work for the eProsima part of the application stems from the 1 to 1 mapping of nodes to DDS participants. 
+* Adding more ROS2 nodes increases both the work performed by the eProsima and SingleThreadedExecutor part of the application. For the SingleThreadedExecutor this makes sense, more nodes means more work for the executor. The increase in work for the eProsima part of the application stems from the 1-to-1 mapping of nodes to DDS participants. 
 
 ## Discussion
 W.r.t. The SingleThreadedExecutor:
@@ -133,7 +133,7 @@ W.r.t. The SingleThreadedExecutor:
 
 TODO: ROS discourse link
 
-W.r.t. The 1 to 1 mapping of nodes to DDS participants:
+W.r.t. 1-to-1 mapping of nodes to DDS participants:
 
 The roadmap mentions "Reconsider 1-to-1 mapping of ROS nodes to DDS participants" https://index.ros.org/doc/ros2/Roadmap/ . We would like to see this happen rather sooner than later. We already observe that this leads to problems in CPU usage and can constrain people in their freedom to design an architecture for a robotic system. The ROS2 middleware should allow for a setting where everything can be grouped into a single DDS participant for the people that want to use nodes for modularity at the top level, but don't want the code fragmented at the bottom level. Many use cases exist where one would like to create multiple nodes that all run on the same hardware. This is especially important since intra-process communication does not work efficiently at the time of writing this file. 
 
