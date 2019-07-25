@@ -74,7 +74,7 @@ To inspect which functions are using the most CPU there are multiple options. We
 The results of both tools were basically the same, therefore we picked the most readable output to share our findings.
 In our opinion the FlameGraphs generated from perf's data are more readable than kcachegrinds callee maps and call-graphs.
 
-##### Measurements performed on this package using perf
+#### Measurements performed on this package using perf
 We ran each binary for 30 seconds and recorded the amount of CPU cycles and time spent in each function using:
 ```
 source /opt/ros/dashing/setup.bash
@@ -92,7 +92,7 @@ The CPU usage % for each container is measured at the same time so the multiplic
 | rosonenode | ~1.3e10 | ~21| ~3.5 | ~3.5 |
 | ros | ~3.8e10 | ~63| ~10.6 | ~10.5 |
 
-Because the multiplicates between the amount of CPU cycles and the amount of CPU usage % are so close together we can assume that we can now directly compare the average amount of CPU cycles spent in a function between binaries. We are aware this is a quite crude approach and does not entirely filter out the noise of background processes, but we are certain the conclusions based on this research remain the same. We are not looking to accurately measure if ROS 2 uses 10.5 or 10.6 times more CPU for our system, we are investigating WHY and WHERE ROS 2 is using more CPU.  
+Because the multiplicates between the amount of CPU cycles and the amount of CPU usage % are so close together we can assume that we can now directly compare the average amount of CPU cycles spent in a function between binaries. We are aware this is a quite crude approach and does not entirely filter out the noise of background processes, but we are certain the observations and conclusions based on this research remain the same. We are not looking to accurately measure if ROS 2 uses 10.5 or 10.6 times more CPU for our system, we are investigating WHY and WHERE ROS 2 is using more CPU.  
 
 The following table shows the amount CPU cycles spent in the two main classes of each binary:
 
@@ -114,3 +114,27 @@ The distribution in the table above is also represented in the FlameGraph below:
 FlameGraph of rosonenode (70% SingleThreadedExecutor, 20% eProsima, 10% other).
 
 ![Alt text](/images/rosonenode.png?raw=true "FlameGraph for rosonenode")
+
+TODO: The FlameGraphs of the other binaries can be found in the images folder.
+
+## Observations
+* The percentual contribution of the SingleThreadedExecutor for the rosonenode binary is very high.
+* The amount of CPU cycles for the eProsima part of the rtps binary and rosonenode binary are very similar (3.0e9 vs 2.5e9).
+* The amount of CPU cycles for the eprosima part of the ros binary is much higher than for the rosonenode binary (1.2e10 vs 2.5e9).
+* The amount of CPU cycles for the SingleThreadedExecutor of the ros binary is much higher than for the rosonenode binary (1.6e10 vs 9.1e9).
+
+## Conclusions
+* The SingleThreadedExecutor is using a lot of CPU power. 
+* Adding more ROS2 nodes increases both the work performed by the eProsima and SingleThreadedExecutor part of the application. For the SingleThreadedExecutor this makes sense, more nodes means more work for the executor. The increase in work for the eProsima part of the application stems from the 1 to 1 mapping of nodes to DDS participants. 
+
+## Discussion
+W.r.t. The SingleThreadedExecutor:
+
+
+TODO: ROS discourse link
+
+W.r.t. The 1 to 1 mapping of nodes to DDS participants:
+
+The roadmap mentions "Reconsider 1-to-1 mapping of ROS nodes to DDS participants" https://index.ros.org/doc/ros2/Roadmap/ . We would like to see this happen rather sooner than later. We already observe that this leads to problems in CPU usage and can constrain people in their freedom to design an architecture for a robotic system. The ROS2 middleware should allow for a setting where everything can be grouped into a single DDS participant for the people that want to use nodes for modularity at the top level, but don't want the code fragmented at the bottom level. Many use cases exist where one would like to create multiple nodes that all run on the same hardware. This is especially important since intra-process communication does not work at the time of writing this file. 
+
+TODO: ROS discourse link
