@@ -18,11 +18,53 @@ noros and nopub are added for comparison to get an initial idea of overhead gene
 
 &ast;C++ implementation no network publishing/subscribing.
 
-
-Running all examples in isolated docker containers so they can be compared using docker stats gives the following result:
+Running all examples in isolated docker containers gives the following result:
 ![Alt text](/images/docker_comparison.png?raw=true "Docker comparison of binaries")
 
 ## Recreating the issue using Docker
+It is possible to git clone this repository, build the workspace using colcon build and inspecting the CPU usage with top or a similar program for each binary individually. It is however much easier to give each binary its own container (make sure to separate their networks or give them a unique ROS_DOMAIN_ID) and measure the usage of each container.
+If you don't have docker and docker compose installed first follow online tutorials on how to install these: https://docs.docker.com/install/ https://docs.docker.com/compose/install/ .
 
+1. Clone this repository
+```
+git clone https://github.com/scgroot/ros2_performance.git
+```
+2. cd into the folder 
+```
+cd ros2_performance
+```
+3. Build the docker image [requires you to have docker installed properly following the links above] (this will take a while)
+```
+docker build -t ros2_performance:dashing .
+```
+*you can name the image differently by replacing "ros2_performance:dashing" by something else, but this will require you to change the docker-compose.yml file accordingly.*
 
+4. Run a compose file
+```
+cd compose_files
+```
+here you have 2 options, each folder contains a docker-compose.yml. The "all" folder will start all the binaries listed in the table above. The "pubs_subs" folder will only start "rtps", "ros" and "rosonenode".
+```
+cd all
+```
+or
+```
+cd pubs_subs
+```
+then 
+```
+docker-compose up
+```
+5. Inspect the CPU usage
+In a new terminal (ctrl+alt+t) do:
+```
+docker stats
+```
+It is possible to specify the format of the output to show more or less information for example:
+```
+docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.PIDs}}"
+```
+This will only display the container Name, the CPU percentage, Memory usage and PIDS.
+You should now see a terminal similar to the image above. 
 
+## Perf results
