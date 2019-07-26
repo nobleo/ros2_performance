@@ -130,8 +130,10 @@ The FlameGraphs of the other binaries can be found in the images folder, to prop
 ## Discussion
 W.r.t. The SingleThreadedExecutor:
 
+Our current analysis suggests that the SingleThreadedExecutor needs to be optimized otherwise normal ROS 2 cannot work properly on 'ARM A-class' embedded boards. We are willing to look more into this problem by performing more tests and providing feedback to improvements. If you have findings or run into similar problems, please join the ROS Discourse discussion.
 
-TODO: ROS discourse link
+ROS Discourse discussion on this topic can be found here:
+https://discourse.ros.org/t/singlethreadedexecutor-creates-a-high-cpu-overhead-in-ros-2/10077
 
 W.r.t. 1-to-1 mapping of nodes to DDS participants:
 
