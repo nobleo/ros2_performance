@@ -110,12 +110,12 @@ The contribution of each class relative to their respective binary can be seen b
 | rosonenode| ~19.6% | ~70%| ~10.4%|
 | ros | ~32% | ~ 43.9%| ~24.1% |
 
-The distribution in the table above is also represented in the FlameGraph below:
-FlameGraph of rosonenode (70% SingleThreadedExecutor, 20% eProsima, 10% other).
+The distribution in the table above is also represented in the FlameGraph when opened in Hotspot.
+The FlameGraph image of rosonenode below is not to scale, but does show all the function calls.
 
 ![Alt text](/images/rosonenode.png?raw=true "FlameGraph for rosonenode")
 
-TODO: The FlameGraphs of the other binaries can be found in the images folder.
+The FlameGraphs of the other binaries can be found in the images folder, to properly see the distributions in hotspot please generate perf.data files on your local machine. How to do this is explained on the Hotspot github page, a link to this page can be found in this README under **CPU profiling methods**.
 
 ## Observations
 * The percentual contribution of the SingleThreadedExecutor for the rosonenode binary is very high.
