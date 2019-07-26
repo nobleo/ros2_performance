@@ -115,7 +115,7 @@ The FlameGraph image of rosonenode below is not to scale, but does show all the 
 
 ![Alt text](/images/rosonenode.png?raw=true "FlameGraph for rosonenode")
 
-The FlameGraphs of the other binaries can be found in the images folder, to properly see the distributions in hotspot please generate perf.data files on your local machine. How to do this is explained on the Hotspot github page, a link to this page can be found in this README under **CPU profiling methods**.
+The FlameGraphs of the other binaries can be found in the images folder, to properly see the distributions in hotspot please generate perf.data files on your local machine. How to do this is explained on the Hotspot github page, a link to this page can be found in this README under **CPU profiling methods**. The relevant command is also shown directly under **Measurements performed on this package using perf**.
 
 ## Observations
 * The percentual contribution of the SingleThreadedExecutor for the rosonenode binary is very high.
