@@ -25,7 +25,7 @@ Running all examples in isolated docker containers gives the following result:
 ![Alt text](/images/docker_comparison.png?raw=true "Docker comparison of binaries")
 
 ## Recreating the issue using Docker
-It is possible to git clone this repository, build the workspace using colcon build and inspecting the CPU usage with top or a similar program for each binary individually. It is however much easier to give each binary its own container (make sure to separate their networks or give them a unique ROS_DOMAIN_ID) and measure the usage of each container.
+It is possible to git clone this repository, build the workspace using colcon build and inspect the CPU usage with top or a similar program for each binary individually. It is however much easier to give each binary its own container (make sure to separate their networks or give them a unique ROS_DOMAIN_ID) and measure the usage of each container.
 If you don't have docker and docker compose installed first follow online tutorials on how to install these: https://docs.docker.com/install/ https://docs.docker.com/compose/install/ .
 
 1. Clone this repository
