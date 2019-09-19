@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
   using namespace std_msgs::msg;
   rclcpp::init(0, nullptr);
 
-  int create = argc > 1 ? std::atoi(argv[1]) : 10;
+  int create = argc > 1 ? std::atoi(argv[1]) : 1;
   std::chrono::milliseconds interval(argc > 2 ? std::atoi(argv[2]) : 20);
   std::cout << "ROS create " << create << " nodes @ " << interval.count() << "ms" << std::endl;
 
