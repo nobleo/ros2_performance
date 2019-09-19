@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
     for (int s = 0; s < 2 * create; ++s) {
       auto sub = node->create_subscription<String>("topic_" + std::to_string(s), qos,
-                                                   [](String::SharedPtr) {}, options);
+                                                   [](String::SharedPtr) {});
       sub_refs.push_back(sub);
     }
   }
