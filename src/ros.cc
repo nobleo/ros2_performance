@@ -25,15 +25,13 @@ int main(int argc, char **argv) {
   std::vector<rclcpp::Subscription<String>::SharedPtr> sub_refs;
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
 
-  auto pub_options = rclcpp::PublisherOptionsWithAllocator().use_intra_process_comm;
-  auto sub_options = rclcpp::SubscriptionOptionsWithAllocator().use_intra_process_comm;
   for (int n = 0; n < create; ++n) {
     auto node = std::make_shared<rclcpp::Node>("node_" + std::to_string(n));
     node_refs.push_back(node);
     exec.add_node(node);
 
-    auto pub1 = node->create_publisher<String>("topic_" + std::to_string(n), qos, pub_options);
-    auto pub2 = node->create_publisher<String>("topic_" + std::to_string(n + create), qos, pub_options);
+    auto pub1 = node->create_publisher<String>("topic_" + std::to_string(n), qos);
+    auto pub2 = node->create_publisher<String>("topic_" + std::to_string(n + create), qos);
     auto timer = node->create_wall_timer(interval, [=]() {
       String msg;
       msg.data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -44,7 +42,7 @@ int main(int argc, char **argv) {
 
     for (int s = 0; s < 2 * create; ++s) {
       auto sub = node->create_subscription<String>("topic_" + std::to_string(s), qos,
-                                                   [](String::SharedPtr) {}, sub_options);
+                                                   [](String::SharedPtr) {});
       sub_refs.push_back(sub);
     }
   }
