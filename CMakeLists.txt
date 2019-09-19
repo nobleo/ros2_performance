@@ -22,8 +22,4 @@ add_executable(noros src/noros.cc)
 ament_target_dependencies(noros std_msgs rclcpp)
 install(TARGETS noros DESTINATION lib/${PROJECT_NAME})
 
-add_executable(rtps src/rtps.cc src/HelloWorld.cxx src/HelloWorldPubSubTypes.cxx)
-ament_target_dependencies(rtps rmw_fastrtps_cpp)
-install(TARGETS rtps DESTINATION lib/${PROJECT_NAME})
-
 ament_package()
