@@ -25,13 +25,15 @@ int main(int argc, char **argv) {
   std::vector<rclcpp::Subscription<String>::SharedPtr> sub_refs;
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
 
+  auto options = rclcpp::PublisherOptions().use_intra_process_comms(true);
+  
   for (int n = 0; n < create; ++n) {
     auto node = std::make_shared<rclcpp::Node>("node_" + std::to_string(n));
     node_refs.push_back(node);
     exec.add_node(node);
 
     auto pub1 = node->create_publisher<String>("topic_" + std::to_string(n), qos);
-    auto pub2 = node->create_publisher<String>("topic_" + std::to_string(n + create), qos);
+    auto pub2 = node->create_publisher<String>("topic_" + std::to_string(n + create), qos, options);
     auto timer = node->create_wall_timer(interval, [=]() {
       String msg;
       msg.data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
