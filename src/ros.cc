@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   std::vector<rclcpp::Subscription<String>::SharedPtr> sub_refs;
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
 
-  auto options = rclcpp::PublisherOptions().use_intra_process_comms(true);
+  auto options = rclcpp::PublisherOptions().use_intra_process_comm(true);
   for (int n = 0; n < create; ++n) {
     auto node = std::make_shared<rclcpp::Node>("node_" + std::to_string(n));
     node_refs.push_back(node);
