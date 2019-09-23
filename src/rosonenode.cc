@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   std::cout << "ROS create " << create << " nodes @ " << interval.count() << "ms" << std::endl;
 
   rclcpp::executors::SingleThreadedExecutor exec;
-  auto node = std::make_shared<rclcpp::Node>("node");
+  auto node = std::make_shared<rclcpp::Node>("node",rclcpp::NodeOptions().use_intra_process_comms(true) );
 
   auto pub0 = node->create_publisher<String>("topic_0", qos);
   auto pub1 = node->create_publisher<String>("topic_1", qos);
