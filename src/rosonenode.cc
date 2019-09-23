@@ -9,7 +9,7 @@
 
 static const rclcpp::QoS qos = rclcpp::QoS(10)
                                    .reliability(RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT)
-                                   .durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+                                   .durability(RMW_QOS_POLICY_DURABILITY_VOLATILE);
 
 int main(int argc, char **argv) {
   using namespace std::chrono_literals;
