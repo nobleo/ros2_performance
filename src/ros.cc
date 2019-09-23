@@ -9,7 +9,7 @@
 
 static const rclcpp::QoS qos = rclcpp::QoS(10)
                                    .reliability(RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT)
-                                   .durability(RMW_QOS_POLICY_DURABILITY_TRANSIENT_LOCAL);
+                                   .durability(RMW_QOS_POLICY_DURABILITY_VOLATILE);
 
 int main(int argc, char **argv) {
   using namespace std::chrono_literals;
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
 
   for (int n = 0; n < create; ++n) {
-    auto node = std::make_shared<rclcpp::Node>("node_" + std::to_string(n));
+    auto node = std::make_shared<rclcpp::Node>("node_" + std::to_string(n), rclcpp::NodeOptions().use_intra_process_comms(true));
     node_refs.push_back(node);
     exec.add_node(node);
 
