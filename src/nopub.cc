@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
   std::cout << "ROS-no publishers create " << create << " nodes @ " << loop_interval.count() << "ms"
             << std::endl;
 
-  rclcpp::executors::StaticSingleThreadedExecutor;
+  rclcpp::executors::StaticSingleThreadedExecutor exec;
   std::vector<rclcpp::Node::SharedPtr> node_refs;
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
 

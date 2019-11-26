@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   std::chrono::milliseconds interval(argc > 2 ? std::atoi(argv[2]) : 20);
   std::cout << "ROS create " << create << " nodes @ " << interval.count() << "ms" << std::endl;
 
-  rclcpp::executors::StaticSingleThreadedExecutor;
+  rclcpp::executors::StaticSingleThreadedExecutor exec;
   std::vector<rclcpp::Node::SharedPtr> node_refs;
   std::vector<rclcpp::Subscription<String>::SharedPtr> sub_refs;
   std::vector<rclcpp::TimerBase::SharedPtr> timer_refs;
