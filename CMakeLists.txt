@@ -5,17 +5,18 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rmw_fastrtps_cpp REQUIRED)
+find_package(static_executor REQUIRED)
 
 add_executable(ros src/ros.cc)
-ament_target_dependencies(ros rclcpp std_msgs)
+ament_target_dependencies(ros rclcpp std_msgs static_executor)
 install(TARGETS ros DESTINATION lib/${PROJECT_NAME})
 
 add_executable(rosonenode src/rosonenode.cc)
-ament_target_dependencies(rosonenode rclcpp std_msgs)
+ament_target_dependencies(rosonenode rclcpp std_msgs static_executor)
 install(TARGETS rosonenode DESTINATION lib/${PROJECT_NAME})
 
 add_executable(nopub src/nopub.cc)
-ament_target_dependencies(nopub rclcpp std_msgs)
+ament_target_dependencies(nopub rclcpp std_msgs static_executor)
 install(TARGETS nopub DESTINATION lib/${PROJECT_NAME})
 
 add_executable(noros src/noros.cc)

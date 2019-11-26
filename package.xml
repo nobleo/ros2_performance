@@ -13,6 +13,7 @@
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
   <depend>rmw_fastrtps_cpp</depend>
+  <depend>static_executor</depend>
 
   <export>
     <build_type>ament_cmake</build_type>
