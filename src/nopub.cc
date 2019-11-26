@@ -1,6 +1,7 @@
 #include <iostream>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <static_executor/executors/static_single_threaded_executor.hpp>
 
 /*
  * Same as ros.cc, except that it does not publish or subscribe.

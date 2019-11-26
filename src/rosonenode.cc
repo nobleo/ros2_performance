@@ -1,6 +1,7 @@
 #include <iostream>
 #include <rclcpp/rclcpp.hpp>
 #include <std_msgs/msg/string.hpp>
+#include <static_executor/executors/static_single_threaded_executor.hpp>
 
 /*
  * Create 1 node which publishes on twenty different topics.
