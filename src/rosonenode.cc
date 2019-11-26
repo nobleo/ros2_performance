@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
   std::chrono::milliseconds interval(argc > 2 ? std::atoi(argv[2]) : 20);
   std::cout << "ROS create " << create << " nodes @ " << interval.count() << "ms" << std::endl;
 
-  rclcpp::executors::StaticSingleThreadedExecutor
+  rclcpp::executors::StaticSingleThreadedExecutor;
   auto node = std::make_shared<rclcpp::Node>("node");
 
   auto pub0 = node->create_publisher<String>("topic_0", qos);
